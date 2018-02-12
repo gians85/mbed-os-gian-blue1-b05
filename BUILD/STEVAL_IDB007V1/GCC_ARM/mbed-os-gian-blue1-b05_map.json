@@ -4,7 +4,7 @@
         "size": {
             ".data": 4, 
             ".bss": 22, 
-            ".text": 70
+            ".text": 68
         }
     }, 
     {
@@ -20,7 +20,7 @@
         "size": {
             ".data": 0, 
             ".bss": 0, 
-            ".text": 9636
+            ".text": 10440
         }
     }, 
     {
@@ -36,7 +36,7 @@
         "size": {
             ".data": 4, 
             ".bss": 202, 
-            ".text": 1671
+            ".text": 1709
         }
     }, 
     {
@@ -466,7 +466,7 @@
     {
         "summary": {
             "static_ram": 9496, 
-            "total_flash": 61646
+            "total_flash": 62486
         }
     }
 ]

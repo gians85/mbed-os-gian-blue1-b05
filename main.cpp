@@ -1,7 +1,7 @@
 #include "mbed.h"
 #include "colorlib.h"
 #include "imu.h"
-#include <ble_dir/bluenrg1_stack.h>
+
 
 Serial pc(USBTX, USBRX);
 DigitalOut led1(LED1);
@@ -19,19 +19,19 @@ void printMenu();
 uint8_t IMU_register(uint8_t, uint8_t);
 void IMU_readAcc(uint16_t *);
 void IMU_readGyr(uint16_t *);
-int IMU_readTemp();
+float IMU_readTemp();
 void IMU_config();
 void IMU_device();
 
-#define ACC 1
-#define GYR 3
+
+//#define ACC 1
+//#define GYR 3
 uint8_t rx = 0;
 bool flag = 0;
 
 
 int main() {
 	init();
-	//BTLE_StackTick();
 	IMU_device();
 }
 
@@ -56,7 +56,6 @@ void init(){
 void Rx_interrupt() {
 	rx = pc.getc();
 	flag = 1;
-	return;
 }
 
 
@@ -75,6 +74,7 @@ void printMenu(){
 			"\tASSE X\tASSE Y\tASSE Z\r\n"
 			WHITE);
 }
+
 
 void IMU_config(){
 	IMU_register(0x11, 0x12);
@@ -123,14 +123,13 @@ void IMU_readGyr(uint16_t * buf){
 }
 
 
-int IMU_readTemp(){
-	int temp = 0;
+float IMU_readTemp(){
+	int16_t temp = 0;
 	temp  = IMU_register(OUT_TEMP_H, READ);
 	temp <<= 8;
 	temp |= IMU_register(OUT_TEMP_L, READ);
-	return temp;
+	return (25.0+(((float)temp)/16));
 }
-
 
 void IMU_device(){
 	IMU_config();
@@ -165,7 +164,9 @@ void IMU_device(){
 			pc.printf(CLEARLINE2 CR " TEMP ");
 			//a = 0.00875;
 			while (!flag){
-				pc.printf("\r\t%d", IMU_readTemp());
+				//int16_t temp = IMU_readTemp();
+				//pc.printf("\r\t%.1f", (25.0+(((float)temp)/16)));
+				pc.printf("\r\t%.1f", IMU_readTemp());
 				wait_ms(200);
 			}
 			break;
@@ -180,4 +181,8 @@ void IMU_device(){
 		wait_ms(200);
 	}
 }
+
+
+
+
 

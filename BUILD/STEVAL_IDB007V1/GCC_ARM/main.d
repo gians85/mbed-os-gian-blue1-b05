@@ -118,6 +118,4 @@ BUILD\STEVAL_IDB007V1\GCC_ARM\.\main.o: main.cpp \
  mbed-os/platform/FileSystemHandle.h mbed-os/platform/FileHandle.h \
  mbed-os/platform/DirHandle.h mbed-os/platform/CriticalSectionLock.h \
  mbed-os/platform/DeepSleepLock.h mbed-os/platform/Callback.h \
- mbed-os/platform/FunctionPointer.h colorlib.h imu.h \
- ble_dir/bluenrg1_stack.h ble_dir/bluenrg1_api.h \
- ble_dir/bluenrg1_events.h
+ mbed-os/platform/FunctionPointer.h colorlib.h imu.h

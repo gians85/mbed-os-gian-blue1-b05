@@ -85,7 +85,7 @@
         </option>
         <option>
           <name>OCDynDriverList</name>
-          <state>STLINK_ID</state>
+          <state>CMSISDAP_ID</state>
         </option>
         <option>
           <name>OCLastSavedByProductVersion</name>
@@ -113,7 +113,7 @@
         </option>
         <option>
           <name>FlashLoadersV3</name>
-          <state>$TOOLKIT_DIR$\config\flashloader\ST\BlueNRG-1.board</state>
+          <state></state>
         </option>
         <option>
           <name>OCImagesSuppressCheck1</name>
@@ -328,7 +328,7 @@
         <option>
           <name>CMSISDAPResetList</name>
           <version>1</version>
-          <state>2</state>
+          <state>10</state>
         </option>
         <option>
           <name>CMSISDAPHWResetDuration</name>
@@ -1298,7 +1298,7 @@
         </option>
         <option>
           <name>CCSTLinkDAPNumber</name>
-          <state>0</state>
+          <state></state>
         </option>
       </data>
     </settings>
@@ -1634,5 +1634,4 @@
     </debuggerPlugins>
   </configuration>
 </project>
-
 

@@ -7,7 +7,7 @@ mbedclean:
 	-@echo ' '
 
 linker-script-debug.ld: ../mbed-os/targets/TARGET_STMBLUE/TARGET_BLUENRG1/TARGET_STEVAL_IDB007V1/device/TOOLCHAIN_GCC_ARM/BLUENRG1.ld
-	"C:\Program Files (x86)\GNU Tools ARM Embedded\6 2017-q2-update\bin\arm-none-eabi-cpp" -E -P -DMBED_DEBUG -DMBED_TRAP_ERRORS_ENABLED=1 -Wl,-n -Wl,--start-group -lstdc++ -lsupc++ -lm -lc -lgcc -lnosys -Wl,--end-group $< -o $@
+	"C:\Program Files (x86)\GNU Tools ARM Embedded\6 2017-q2-update\bin\arm-none-eabi-cpp" -E -P -DMBED_DEBUG -DMBED_TRAP_ERRORS_ENABLED=1 -Wl,-n -Wl,--start-group -lstdc++ -lsupc++ -lm -lc -lgcc -lnosys -lbluenrg1_stack -Wl,--end-group $< -o $@
 mbed-os-gian-blue1-b05.elf: linker-script-debug.ld
 linker-script-release.ld: ../mbed-os/targets/TARGET_STMBLUE/TARGET_BLUENRG1/TARGET_STEVAL_IDB007V1/device/TOOLCHAIN_GCC_ARM/BLUENRG1.ld
 	"C:\Program Files (x86)\GNU Tools ARM Embedded\6 2017-q2-update\bin\arm-none-eabi-cpp" -E -P -DNDEBUG -Wl,-n -Wl,--start-group -lstdc++ -lsupc++ -lm -lc -lgcc -lnosys -Wl,--end-group $< -o $@
