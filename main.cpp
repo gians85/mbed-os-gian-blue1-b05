@@ -10,7 +10,6 @@ DigitalOut led3(LED3);
 DigitalIn but1(PUSH1);
 DigitalIn but2(PUSH2);
 SPI spi(SPI_MOSI, SPI_MISO, SPI_SCK, SPI_CS); // mosi, miso, sclk
-DigitalOut cs(SPI_CS);
 
 
 void init();
@@ -44,7 +43,6 @@ void init(){
 	// Serial interface
 	pc.attach(&Rx_interrupt, Serial::RxIrq);
 	// SPI Interface
-	cs=1;
 	spi.format(8, 0);
 	spi.frequency(100000);
 	// Ready
@@ -85,15 +83,23 @@ void IMU_config(){
 
 
 uint8_t IMU_register(uint8_t reg_name, uint8_t data){
-	uint8_t value;
+	/*uint8_t value;
 	if(data==READ){
 		reg_name |= READ_1B;
 	}
-	cs = 0;
+	//cs = 0;
 	spi.write(reg_name);
 	value = spi.write(data);
 	cs = 1;
-	return value;
+	return value;*/
+
+	char reg, value;
+	if(data==READ){
+		 reg_name |= READ_1B;
+	}
+	reg = (char)reg_name;
+	spi.write(&reg, 1, &value, 1);
+	return (uint8_t)value;
 }
 
 
