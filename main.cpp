@@ -9,13 +9,14 @@ DigitalOut led2(LED2);
 DigitalOut led3(LED3);
 DigitalIn but1(PUSH1);
 DigitalIn but2(PUSH2);
-SPI spi(SPI_MOSI, SPI_MISO, SPI_SCK, SPI_CS); // mosi, miso, sclk
+SPI spi(SPI_MOSI, SPI_MISO, SPI_SCK, SPI_CS); // mosi, miso, sclk, cs
+DigitalOut cs(SPI_CS);
 
 
 void init();
 void Rx_interrupt();
 void printMenu();
-uint8_t IMU_register(uint8_t, uint8_t);
+uint8_t IMU_register(char, char);
 void IMU_readAcc(uint16_t *);
 void IMU_readGyr(uint16_t *);
 float IMU_readTemp();
@@ -23,8 +24,6 @@ void IMU_config();
 void IMU_device();
 
 
-//#define ACC 1
-//#define GYR 3
 uint8_t rx = 0;
 bool flag = 0;
 
@@ -82,24 +81,18 @@ void IMU_config(){
 }
 
 
-uint8_t IMU_register(uint8_t reg_name, uint8_t data){
-	/*uint8_t value;
-	if(data==READ){
+uint8_t IMU_register(char reg_name, char data){
+	char buf[2];
+	if (data == READ){
 		reg_name |= READ_1B;
+		spi.write(&reg_name, 1, &data, 1);
 	}
-	//cs = 0;
-	spi.write(reg_name);
-	value = spi.write(data);
-	cs = 1;
-	return value;*/
-
-	char reg, value;
-	if(data==READ){
-		 reg_name |= READ_1B;
+	else{
+		buf[0] = reg_name;
+		buf[1] = data;
+		spi.write(buf, 2, &data, 0);
 	}
-	reg = (char)reg_name;
-	spi.write(&reg, 1, &value, 1);
-	return (uint8_t)value;
+	return (uint8_t)data;
 }
 
 
@@ -163,15 +156,12 @@ void IMU_device(){
 			a = 0.00875;
 			while (!flag){
 				IMU_readGyr(buf);
-				pc.printf("\r\t%.4f  %.4f  %.4f", buf[0]*a, buf[1]*a, buf[2]*a);
+				pc.printf("\r\t%.4f  %.4f  %.4f", (buf[0]*a), (buf[1]*a), (buf[2]*a));
 			}
 			break;
 		case 't': case 'T':
 			pc.printf(CLEARLINE2 CR " TEMP ");
-			//a = 0.00875;
 			while (!flag){
-				//int16_t temp = IMU_readTemp();
-				//pc.printf("\r\t%.1f", (25.0+(((float)temp)/16)));
 				pc.printf("\r\t%.1f", IMU_readTemp());
 				wait_ms(200);
 			}

@@ -4,7 +4,7 @@
         "size": {
             ".data": 4, 
             ".bss": 22, 
-            ".text": 70
+            ".text": 66
         }
     }, 
     {
@@ -35,8 +35,8 @@
         "module": "main.o", 
         "size": {
             ".data": 4, 
-            ".bss": 194, 
-            ".text": 1675
+            ".bss": 202, 
+            ".text": 1705
         }
     }, 
     {
@@ -452,7 +452,7 @@
         "size": {
             ".data": 0, 
             ".bss": 0, 
-            ".text": 566
+            ".text": 588
         }
     }, 
     {
@@ -465,8 +465,8 @@
     }, 
     {
         "summary": {
-            "static_ram": 9488, 
-            "total_flash": 62510
+            "static_ram": 9496, 
+            "total_flash": 62558
         }
     }
 ]
